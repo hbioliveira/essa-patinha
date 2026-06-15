@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Essa Patinha – Cat Sitters com amor</title>
+  <meta name="description" content="Cuidamos dos seus gatinhos com todo o carinho que eles merecem. Somos cat sitters apaixonadas por gatos." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --preto:   #1a1a1a;
+  --cinza1:  #f6f6f6;
+  --cinza2:  #e8e8e8;
+  --cinza3:  #888;
+  --branco:  #ffffff;
+  --coral:   #ff6b4a;
+  --radius:  16px;
+  --shadow:  0 4px 24px rgba(0,0,0,.08);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--preto);
+  background: var(--branco);
+  line-height: 1.6;
+}
+
+img { max-width: 100%; display: block; }
+a   { color: inherit; text-decoration: none; }
+
+h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 800; line-height: 1.1; }
+h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 700; line-height: 1.2; }
+h3 { font-size: 1.15rem; font-weight: 600; }
+p  { color: #444; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+.section   { padding: 96px 0; }
+.section--gray { background: var(--cinza1); }
+
+.section-label {
+  display: inline-block;
+  font-size: .78rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--coral); margin-bottom: 12px;
+}
+.section-title { margin-bottom: 16px; }
+.section-sub   { color: #555; max-width: 560px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px; border-radius: 50px;
+  font-weight: 700; font-size: .95rem; cursor: pointer;
+  transition: transform .15s, box-shadow .15s; border: none;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.15); }
+.btn-primary   { background: var(--coral); color: #fff; }
+.btn-secondary { background: var(--preto); color: #fff; }
+.btn-outline   { background: transparent; color: var(--coral); border: 2px solid var(--coral); }
+
+/* ── Rainbow bar ── */
+.rainbow-bar {
+  height: 4px;
+  background: linear-gradient(90deg,#ff4040,#ff8c00,#ffd700,#3cb371,#1e90ff,#8a2be2);
+}
+
+/* ════ NAV ════ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--cinza2);
+  transition: box-shadow .2s;
+}
+.nav.scrolled { box-shadow: var(--shadow); }
+.nav__inner {
+  display: flex; align-items: center; justify-content: space-between; height: 68px;
+}
+.nav__logo img { height: 48px; width: auto; }
+.nav__links { display: flex; list-style: none; gap: 32px; }
+.nav__links a { font-size: .9rem; font-weight: 600; transition: color .15s; }
+.nav__links a:hover { color: var(--coral); }
+.nav__cta { margin-left: 16px; }
+
+.nav__hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; background: none; border: none; padding: 4px;
+}
+.nav__hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--preto); border-radius: 2px;
+  transition: transform .25s, opacity .25s;
+}
+.nav__hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav__hamburger.open span:nth-child(2) { opacity: 0; }
+.nav__hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav__mobile {
+  display: none; flex-direction: column;
+  background: var(--branco);
+  padding: 16px 24px 24px;
+  border-top: 1px solid var(--cinza2);
+}
+.nav__mobile.open { display: flex; }
+.nav__mobile a {
+  padding: 12px 0; font-weight: 600;
+  border-bottom: 1px solid var(--cinza2);
+}
+.nav__mobile a:last-child { border: none; }
+.nav__mobile .btn { margin-top: 8px; text-align: center; justify-content: center; }
+
+/* ════ HERO ════ */
+.hero { padding: 160px 0 96px; background: var(--branco); overflow: hidden; }
+.hero__inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: center;
+}
+.hero__kicker {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--cinza1); border-radius: 50px;
+  padding: 6px 16px; font-size: .82rem; font-weight: 600;
+  margin-bottom: 24px;
+}
+.hero__title { margin-bottom: 20px; }
+.hero__title em { color: var(--coral); font-style: normal; }
+.hero__desc { font-size: 1.05rem; margin-bottom: 36px; max-width: 480px; }
+.hero__actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+.hero__image { position: relative; display: flex; justify-content: center; }
+.hero__blob {
+  width: 440px; height: 440px;
+  background: var(--cinza1);
+  border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.hero__blob img { width: 300px; height: 300px; object-fit: contain; }
+.hero__badge {
+  position: absolute; bottom: 24px; left: -16px;
+  background: var(--branco); border-radius: var(--radius);
+  padding: 14px 20px; box-shadow: var(--shadow);
+  display: flex; align-items: center; gap: 12px;
+  font-size: .85rem; font-weight: 600; white-space: nowrap;
+}
+.hero__badge-icon { font-size: 1.6rem; }
+
+/* ════ SOBRE ════ */
+.sobre__inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.sobre__cards {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-top: 40px;
+}
+.sobre__card {
+  background: var(--branco); border-radius: var(--radius);
+  padding: 24px; box-shadow: var(--shadow);
+}
+.sobre__card-icon { font-size: 2rem; margin-bottom: 12px; }
+.sobre__card h3   { margin-bottom: 6px; }
+.sobre__card p    { font-size: .88rem; }
+
+.sobre__visual { position: relative; }
+.sobre__img-wrap {
+  border-radius: 24px; overflow: hidden;
+  background: var(--cinza1); aspect-ratio: 4/5;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 6rem;
+}
+.sobre__pill {
+  position: absolute; top: -20px; right: -20px;
+  background: var(--coral); color: #fff;
+  border-radius: 50%; width: 110px; height: 110px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  font-weight: 800; font-size: .8rem;
+  text-align: center; line-height: 1.2;
+}
+.sobre__pill strong { font-size: 1.6rem; display: block; }
+
+/* ════ EQUIPE ════ */
+.equipe__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 32px; margin-top: 56px;
+}
+.equipe__card {
+  background: var(--branco); border-radius: var(--radius);
+  overflow: hidden; box-shadow: var(--shadow); transition: transform .2s;
+}
+.equipe__card:hover { transform: translateY(-6px); }
+.equipe__photo {
+  aspect-ratio: 1; background: var(--cinza2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 4rem; color: var(--cinza3); overflow: hidden;
+}
+.equipe__photo img { width: 100%; height: 100%; object-fit: cover; }
+.equipe__info { padding: 24px; }
+.equipe__info h3 { margin-bottom: 4px; }
+.equipe__info .role {
+  font-size: .82rem; font-weight: 600;
+  color: var(--coral); margin-bottom: 10px; display: block;
+}
+.equipe__info p { font-size: .88rem; }
+
+/* ════ CLIENTES ════ */
+.depo__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px; margin-top: 56px;
+}
+.depo__card {
+  background: var(--branco); border-radius: var(--radius);
+  padding: 32px; box-shadow: var(--shadow);
+}
+.depo__stars { color: #ffc400; font-size: 1.1rem; margin-bottom: 16px; }
+.depo__text {
+  font-size: .95rem; line-height: 1.7;
+  margin-bottom: 24px; font-style: italic;
+}
+.depo__author { display: flex; align-items: center; gap: 14px; }
+.depo__avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--cinza2); display: flex;
+  align-items: center; justify-content: center;
+  font-size: 1.4rem; flex-shrink: 0; overflow: hidden;
+}
+.depo__avatar img { width: 100%; height: 100%; object-fit: cover; }
+.depo__author-info strong { display: block; font-size: .9rem; }
+.depo__author-info span  { font-size: .8rem; color: var(--cinza3); }
+
+/* ════ CONTATO ════ */
+.contato__inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: start;
+}
+.contato__canais { display: flex; flex-direction: column; gap: 16px; margin-top: 40px; }
+.contato__canal {
+  display: flex; align-items: center; gap: 20px;
+  background: var(--branco); border-radius: var(--radius);
+  padding: 20px 24px; box-shadow: var(--shadow);
+  transition: transform .15s; font-weight: 600;
+}
+.contato__canal:hover { transform: translateX(6px); }
+.contato__canal-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; flex-shrink: 0;
+}
+.canal-insta { background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+.canal-whats { background: #25d366; }
+.contato__canal-text strong { display: block; }
+.contato__canal-text span   { font-size: .82rem; color: var(--cinza3); font-weight: 400; }
+
+.contato__form-wrap {
+  background: var(--cinza1); border-radius: 24px; padding: 40px;
+}
+.contato__form-wrap h3 { margin-bottom: 24px; }
+
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: 8px; }
+.form-group input,
+.form-group textarea {
+  width: 100%; padding: 12px 16px;
+  border: 1.5px solid var(--cinza2); border-radius: 10px;
+  font-size: .95rem; font-family: inherit;
+  background: var(--branco); transition: border-color .15s; color: var(--preto);
+}
+.form-group input:focus,
+.form-group textarea:focus { outline: none; border-color: var(--coral); }
+.form-group textarea { resize: vertical; min-height: 120px; }
+.form__btn { width: 100%; justify-content: center; }
+
+/* ════ FOOTER ════ */
+.footer { background: var(--preto); color: #ccc; padding: 48px 0 32px; }
+.footer__inner {
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap;
+  gap: 24px; margin-bottom: 32px;
+}
+.footer__logo img { height: 44px; filter: brightness(0) invert(1); }
+.footer__links { display: flex; gap: 24px; list-style: none; flex-wrap: wrap; }
+.footer__links a { font-size: .88rem; transition: color .15s; }
+.footer__links a:hover { color: var(--coral); }
+.footer__socials { display: flex; gap: 12px; }
+.footer__social {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; transition: background .15s;
+}
+.footer__social:hover { background: var(--coral); }
+.footer__bottom {
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding-top: 24px; font-size: .8rem;
+  text-align: center; color: #666;
+}
+
+/* ════ RESPONSIVO ════ */
+@media (max-width: 900px) {
+  .hero__inner, .sobre__inner, .contato__inner { grid-template-columns: 1fr; }
+  .hero { padding: 120px 0 64px; }
+  .hero__image { display: none; }
+  .sobre__visual { display: none; }
+  .sobre__cards { grid-template-columns: 1fr 1fr; }
+  .nav__links, .nav__cta { display: none; }
+  .nav__hamburger { display: flex; }
+}
+@media (max-width: 600px) {
+  .section { padding: 72px 0; }
+  .sobre__cards { grid-template-columns: 1fr; }
+  .footer__inner { flex-direction: column; align-items: flex-start; }
+  .contato__form-wrap { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="topo">
+  <div class="container nav__inner">
+    <a href="#topo" class="nav__logo">
+      <img src="logo.png" alt="Essa Patinha" />
+    </a>
+    <nav>
+      <ul class="nav__links">
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#equipe">Equipe</a></li>
+        <li><a href="#clientes">Clientes</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+    <a href="#contato" class="btn btn-primary nav__cta">Falar com a gente 🐱</a>
+    <button class="nav__hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="nav__mobile">
+    <a href="#inicio">Início</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#equipe">Equipe</a>
+    <a href="#clientes">Clientes</a>
+    <a href="#contato">Contato</a>
+    <a href="#contato" class="btn btn-primary">Falar com a gente 🐱</a>
+  </nav>
+</header>
+
+<div class="rainbow-bar"></div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="container hero__inner">
+    <div class="hero__text">
+      <div class="hero__kicker"><span>🐾</span> Cat Sitters profissionais</div>
+      <h1 class="hero__title">Seu gato <em>merece</em> o melhor cuidado</h1>
+      <p class="hero__desc">
+        A Essa Patinha cuida dos seus gatinhos com todo o amor e atenção que eles merecem —
+        seja pra uma saída rápida ou uma viagem mais longa.
+      </p>
+      <div class="hero__actions">
+        <a href="#contato" class="btn btn-primary">Agendar agora</a>
+        <a href="#sobre" class="btn btn-outline">Saiba mais</a>
+      </div>
+    </div>
+    <div class="hero__image">
+      <div class="hero__blob">
+        <img src="logo.png" alt="Essa Patinha" />
+      </div>
+      <div class="hero__badge">
+        <span class="hero__badge-icon">😻</span>
+        <div>
+          <strong>Gatinhos felizes</strong>
+          <span style="display:block;font-size:.78rem;color:#888;font-weight:400">tutores tranquilos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section class="section section--gray" id="sobre">
+  <div class="container sobre__inner">
+    <div>
+      <span class="section-label">Quem somos</span>
+      <h2 class="section-title">Amor por gatos que virou profissão</h2>
+      <p class="section-sub">
+        Somos amigas apaixonadas por gatos que resolveram transformar esse amor em cuidado de verdade.
+        Cada gatinho que passa pelas nossas mãos é tratado como se fosse nosso.
+      </p>
+      <div class="sobre__cards">
+        <div class="sobre__card">
+          <div class="sobre__card-icon">🏠</div>
+          <h3>Na sua casa</h3>
+          <p>Cuidamos do seu gato no conforto e segurança do lar dele.</p>
+        </div>
+        <div class="sobre__card">
+          <div class="sobre__card-icon">📸</div>
+          <h3>Updates diários</h3>
+          <p>Fotos e vídeos pra você não perder nenhum momento fofo.</p>
+        </div>
+        <div class="sobre__card">
+          <div class="sobre__card-icon">💊</div>
+          <h3>Medicação & dieta</h3>
+          <p>Seguimos à risca as orientações do veterinário e do tutor.</p>
+        </div>
+        <div class="sobre__card">
+          <div class="sobre__card-icon">❤️</div>
+          <h3>Com amor</h3>
+          <p>Cada gatinho recebe atenção, carinho e muito mimo.</p>
+        </div>
+      </div>
+    </div>
+    <div class="sobre__visual">
+      <div class="sobre__img-wrap">🐱</div>
+      <div class="sobre__pill"><strong>100%</strong>dedicação</div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPE -->
+<section class="section" id="equipe">
+  <div class="container">
+    <span class="section-label">Nossa equipe</span>
+    <h2 class="section-title">Quem vai cuidar do seu bichano</h2>
+    <p class="section-sub">
+      Apaixonadas por gatos, experientes e cheias de carinho — conheça as meninas da Essa Patinha.
+    </p>
+    <div class="equipe__grid">
+      <div class="equipe__card">
+        <div class="equipe__photo">🐾</div>
+        <div class="equipe__info">
+          <h3>Nome da Cat Sitter</h3>
+          <span class="role">Cat Sitter</span>
+          <p>Breve descrição sobre ela, personalidade, experiência com gatos e o que ela mais ama nesse trabalho.</p>
+        </div>
+      </div>
+      <div class="equipe__card">
+        <div class="equipe__photo">🐾</div>
+        <div class="equipe__info">
+          <h3>Nome da Cat Sitter</h3>
+          <span class="role">Cat Sitter</span>
+          <p>Breve descrição sobre ela, personalidade, experiência com gatos e o que ela mais ama nesse trabalho.</p>
+        </div>
+      </div>
+      <div class="equipe__card">
+        <div class="equipe__photo">🐾</div>
+        <div class="equipe__info">
+          <h3>Nome da Cat Sitter</h3>
+          <span class="role">Cat Sitter</span>
+          <p>Breve descrição sobre ela, personalidade, experiência com gatos e o que ela mais ama nesse trabalho.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTES -->
+<section class="section section--gray" id="clientes">
+  <div class="container">
+    <span class="section-label">Clientes</span>
+    <h2 class="section-title">O que os tutores dizem</h2>
+    <p class="section-sub">Nada melhor do que ouvir de quem já confiou seus gatinhos pra gente.</p>
+    <div class="depo__grid">
+      <div class="depo__card">
+        <div class="depo__stars">★★★★★</div>
+        <p class="depo__text">"Fiquei viajando uma semana e fiquei completamente tranquila! Recebi fotos todos os dias e minha gatinha foi tratada com muito carinho. Super recomendo!"</p>
+        <div class="depo__author">
+          <div class="depo__avatar">😺</div>
+          <div class="depo__author-info">
+            <strong>Nome do Cliente</strong>
+            <span>Tutora da Mel 🐈</span>
+          </div>
+        </div>
+      </div>
+      <div class="depo__card">
+        <div class="depo__stars">★★★★★</div>
+        <p class="depo__text">"Meu gato é bem cismado e mesmo assim se deu super bem. Voltei de viagem e ele estava relax, bem alimentado e feliz. Incrível o trabalho delas!"</p>
+        <div class="depo__author">
+          <div class="depo__avatar">😸</div>
+          <div class="depo__author-info">
+            <strong>Nome do Cliente</strong>
+            <span>Tutor do Bento 🐈‍⬛</span>
+          </div>
+        </div>
+      </div>
+      <div class="depo__card">
+        <div class="depo__stars">★★★★★</div>
+        <p class="depo__text">"Profissionalismo e amor em cada visita. Minha gata tem medicação diária e elas seguiram tudo direitinho. Não consigo imaginar deixar ela com outra pessoa!"</p>
+        <div class="depo__author">
+          <div class="depo__avatar">🐱</div>
+          <div class="depo__author-info">
+            <strong>Nome do Cliente</strong>
+            <span>Tutora da Nina 🤍</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="section" id="contato">
+  <div class="container contato__inner">
+    <div>
+      <span class="section-label">Contato</span>
+      <h2 class="section-title">Vamos cuidar do seu gatinho?</h2>
+      <p class="section-sub">
+        Entre em contato, tire suas dúvidas e agende uma visita de conhecimento sem compromisso.
+      </p>
+      <div class="contato__canais">
+        <a href="https://instagram.com/essapatinha" target="_blank" rel="noopener" class="contato__canal">
+          <div class="contato__canal-icon canal-insta"><i class="fa-brands fa-instagram"></i></div>
+          <div class="contato__canal-text">
+            <strong>Instagram</strong>
+            <span>@essapatinha</span>
+          </div>
+        </a>
+        <a href="https://wa.me/5511900000000" target="_blank" rel="noopener" class="contato__canal">
+          <div class="contato__canal-icon canal-whats"><i class="fa-brands fa-whatsapp"></i></div>
+          <div class="contato__canal-text">
+            <strong>WhatsApp</strong>
+            <span>Chame a gente!</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="contato__form-wrap">
+      <h3>Manda uma mensagem 🐾</h3>
+      <form class="contato__form">
+        <div class="form-group">
+          <label for="nome">Seu nome</label>
+          <input type="text" id="nome" name="nome" placeholder="Maria Silva" required />
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" placeholder="maria@email.com" required />
+        </div>
+        <div class="form-group">
+          <label for="gato">Nome do seu gatinho</label>
+          <input type="text" id="gato" name="gato" placeholder="Bigodes, Luna, Mimi..." />
+        </div>
+        <div class="form-group">
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" placeholder="Conte um pouquinho sobre o seu gato e o que você precisa..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary form__btn">Enviar mensagem 🐱</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <a href="#topo" class="footer__logo">
+        <img src="logo.png" alt="Essa Patinha" />
+      </a>
+      <ul class="footer__links">
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#equipe">Equipe</a></li>
+        <li><a href="#clientes">Clientes</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+      <div class="footer__socials">
+        <a href="https://instagram.com/essapatinha" target="_blank" rel="noopener" class="footer__social" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://wa.me/5511900000000" target="_blank" rel="noopener" class="footer__social" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer__bottom">© 2025 Essa Patinha · Feito com 🐾 e muito amor</div>
+  </div>
+</footer>
+
+<script>
+const nav = document.querySelector('.nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+const hamburger = document.querySelector('.nav__hamburger');
+const mobileMenu = document.querySelector('.nav__mobile');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+document.querySelectorAll('.nav__mobile a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  });
+});
+
+const form = document.querySelector('.contato__form');
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const btn = form.querySelector('button[type="submit"]');
+  btn.textContent = '✓ Mensagem enviada!';
+  btn.disabled = true;
+  btn.style.background = '#3cb371';
+  form.reset();
+  setTimeout(() => {
+    btn.textContent = 'Enviar mensagem 🐱';
+    btn.disabled = false;
+    btn.style.background = '';
+  }, 4000);
+});
+</script>
+</body>
+</html>

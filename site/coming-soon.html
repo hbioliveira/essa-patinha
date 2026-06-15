@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Essa Patinha – Em breve</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #f6f6f6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+
+.rainbow-top {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg,#ff4040,#ff8c00,#ffd700,#3cb371,#1e90ff,#8a2be2);
+}
+
+.card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 56px 48px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 8px 40px rgba(0,0,0,.08);
+}
+
+.logo { width: 160px; margin: 0 auto 32px; }
+
+h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+h1 em { color: #ff6b4a; font-style: normal; }
+
+p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.socials {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: .88rem;
+  text-decoration: none;
+  transition: transform .15s, box-shadow .15s;
+}
+.social-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.12); }
+
+.btn-insta {
+  background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+  color: #fff;
+}
+.btn-whats { background: #25d366; color: #fff; }
+
+.paw {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  display: block;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+@media (max-width: 480px) {
+  .card { padding: 40px 24px; }
+  .socials { flex-direction: column; }
+  .social-btn { justify-content: center; }
+}
+</style>
+</head>
+<body>
+  <div class="rainbow-top"></div>
+
+  <div class="card">
+    <img src="logo.png" alt="Essa Patinha" class="logo" />
+    <span class="paw">🐾</span>
+    <h1>Algo <em>fofo</em> vem aí</h1>
+    <p>
+      Estamos preparando tudo com muito carinho pra cuidar dos seus gatinhos.
+      Em breve nosso site estará no ar — enquanto isso, nos encontre nas redes!
+    </p>
+    <div class="socials">
+      <a href="https://instagram.com/essapatinha" target="_blank" rel="noopener" class="social-btn btn-insta">
+        <i class="fa-brands fa-instagram"></i> Instagram
+      </a>
+      <a href="https://wa.me/5511900000000" target="_blank" rel="noopener" class="social-btn btn-whats">
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+      </a>
+    </div>
+  </div>
+</body>
+</html>
