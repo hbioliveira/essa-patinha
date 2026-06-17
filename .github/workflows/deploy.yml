@@ -34,21 +34,21 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-  # ── Produção: Hostinger via FTP ───────────────────────────
+  # ── Produção: Hostinger via SSH ───────────────────────────
   deploy-prod:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy via FTP para Hostinger
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: Deploy via SSH para Hostinger
+        uses: appleboy/scp-action@v0.1.7
         with:
-          server:   ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASS }}
-          port:     21
-          protocol: ftps
-          local-dir: site/
-          server-dir: /
-          dangerous-clean-slate: true
+          host:     ${{ secrets.FTP_HOST }}
+          username: u422079692
+          password: ${{ secrets.SSH_PASS }}
+          port:     65002
+          source:   site/*
+          target:   public_html
+          strip_components: 1
+          overwrite: true
